@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Compare Result
+{% endblock %}
+
+{% block main %}
+
+
+<a class="btn btn-primary center" style="display: block; margin: auto; width: 150px;" href="/compareplayers" role="button">Search Again</a>
+</div>
+<div class="containercompareresults" style="background: #d0eaf2">
+    <div></div>
+    <div style="height: 100%; background: #b9b6f2; color: black">
+        <div>
+        <h1 class="center kanit fadein2" style="width: 70%; margin-left: 75px; color: black; background: white; border: solid black">{{ name1 }} - £{{pricep1}}</h1>
+        <table class="table fadein3" style="border: solid; background: white; height: 100px">
+            <thead class="kanit">
+                <tr style="color: black">
+                    <th scope="col">Gameweek</th>
+                    <th scope="col">Minutes Played</th>
+                    <th scope="col">Goals Scored</th>
+                    <th scope="col">Assists</th>
+                    <th scope="col">Yellow Cards</th>
+                    <th scope="col">Red Cards</th>
+                    <th scope="col">Influence</th>
+                    <th scope="col">Points</th>
+                    <th scope="col">Opposition</th>
+                </tr>
+            </thead>
+            <tbody class="kanit" style="color: black">
+                {% for player in statp1 %}
+                    <tr>
+                        <td>{{ player.GW }}</td>
+                        <td>{{ player.minutes }}</td>
+                        <td>{{ player.goals_scored }}</td>
+                        <td>{{ player.assists }}</td>
+                        <td>{{ player.yellow_cards }}</td>
+                        <td>{{ player.red_cards }}</td>
+                        <td>{{ player.influence }}</td>
+                        <td>{{ player.total_points }}</td>
+                        <td>{{ player.name1 }}</td>
+
+                        <td>
+                {% endfor %}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+    <div style="height: 100%; background: #b9b6f2; color: black">
+        <div>
+        <h1 class="center kanit fadein2" style="width: 70%; margin-left: 75px; color: black; background: white; border: solid black">{{ name2 }} - £{{pricep2}}</h1>
+        <table class="table fadein3" style="margin: auto; border: solid; background: white; height: 100px">
+            <thead class="kanit">
+                <tr style="color: black">
+                    <th scope="col">Gameweek</th>
+                    <th scope="col">Minutes Played</th>
+                    <th scope="col">Goals Scored</th>
+                    <th scope="col">Assists</th>
+                    <th scope="col">Yellow Cards</th>
+                    <th scope="col">Red Cards</th>
+                    <th scope="col">Influence</th>
+                    <th scope="col">Points</th>
+                    <th scope="col">Opposition</th>
+                </tr>
+            </thead>
+            <tbody class="kanit" style="color: black">
+                {% for player2 in statp2 %}
+                    <tr>
+                        <td>{{ player2.GW }}</td>
+                        <td>{{ player2.minutes }}</td>
+                        <td>{{ player2.goals_scored }}</td>
+                        <td>{{ player2.assists }}</td>
+                        <td>{{ player2.yellow_cards }}</td>
+                        <td>{{ player2.red_cards }}</td>
+                        <td>{{ player2.influence }}</td>
+                        <td>{{ player2.total_points }}</td>
+                        <td>{{ player2.name1 }}</td>
+
+                        <td>
+                {% endfor %}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+{% endblock %}
