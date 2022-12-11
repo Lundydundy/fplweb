@@ -1,11 +1,9 @@
 import os
 
-from flask import json, Flask, flash, redirect, render_template, request, session
 from csv import DictReader
+from flask import json, Flask, flash, redirect, render_template, request, session
 from helpers import apology
-import sqlite3
 from sql import SQL
-import sqlalchemy
 
 # Configure application
 app = Flask(__name__)
