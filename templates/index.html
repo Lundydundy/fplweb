@@ -1,0 +1,262 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+{% block head %}
+<script>
+    function sortTableL(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("myTable2");
+      switching = true;
+      // Set the sorting direction to ascending:
+      dir = "asc";
+      /* Make a loop that will continue until
+      no switching has been done: */
+      while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+          // Start by saying there should be no switching:
+          shouldSwitch = false;
+          /* Get the two elements you want to compare,
+          one from current row and one from the next: */
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          /* Check if the two rows should switch place,
+          based on the direction, asc or desc: */
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /* If a switch has been marked, make the switch
+          and mark that a switch has been done: */
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          // Each time a switch is done, increase this count by 1:
+          switchcount ++;
+        } else {
+          /* If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+    </script>
+
+<script>
+    function sortTableN(n) {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("myTable2");
+      switching = true;
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          //check if the two rows should switch place:
+          if (Number(x.innerHTML) < Number(y.innerHTML)) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
+    </script>
+
+
+    {% endblock %}
+
+
+{% block main %}
+
+<h3 class="center kanit">Latest Gameweek: {{ GW }}</h3>
+<h5 class="center kanit fadein3" style="color: black">Current form is based on last 3 matches</h5>
+
+</div>
+<div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
+    <h1 class="kanit fadein3" style=" color: black">Current Top Players</h1>
+    <table class="table fadein3" id ="myTable2">
+        <thead class="kanit">
+            <tr style="color: black">
+                <th scope="col">Position</th>
+                <th scope="col" onclick="sortTableL(1)">Name</th>
+                <th scope="col" onclick="sortTableL(2)">Team</th>
+                <th scope="col" onclick="sortTableN(3)">Average Points</th>
+                <th scope="col" onclick="sortTableN(4)">Average xG Per 90</th>
+                <th scope="col" onclick="sortTableN(5)">Average xA Per 90</th>
+                <th scope="col" onclick="sortTableN(6)">Price</th>
+                <th scope="col" onclick="sortTableN(7)">Points Per Million</th>
+            </tr>
+        </thead>
+        <tbody class="kanit" style="color: black">
+            {% for line in topcurrentplayers %}
+                <tr >
+                    <td>{{ line.position }}</td>
+                    <td>{{ line.name }}</td>
+                    <td>{{ line.team }}</td>
+                    <td>{{ line.averagepoints }}</td>
+                    <td>{{ line.xG }}</td>
+                    <td>{{ line.xA }}</td>
+                    <td>{{ line.value }}</td>
+                    <td>{{ line.pointspermili }}</td>
+
+            {% endfor %}
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="fadein2" style= "width: 85%; background: #b9b6f2; color: black; margin: auto">
+    <h1 class="kanit fadein3" style="color: black">Current Top Forwards</h1>
+    <table class="table fadein3">
+        <thead class="kanit">
+            <tr style="color: black">
+                <th scope="col">Name</th>
+                <th scope="col">Team</th>
+                <th scope="col">Average Points</th>
+                <th scope="col">xG Per 90</th>
+                <th scope="col">xA Per 90</th>
+                <th scope="col">Price</th>
+                <th scope="col">Points Per Million</th>
+            </tr>
+        </thead>
+        <tbody class="kanit" style="color: black">
+            {% for line in topcurrentforwards %}
+                <tr >
+                    <td>{{ line.name }}</td>
+                    <td>{{ line.team }}</td>
+                    <td>{{ line.averagepoints }}</td>
+                    <td>{{ line.xG }}</td>
+                    <td>{{ line.xA }}</td>
+                    <td>{{ line.value }}</td>
+                    <td>{{ line.pointspermili }}</td>
+                    {% endfor %}
+        </tr>
+    </tbody>
+    </table>
+    </div>
+
+<div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
+    <h1 class="kanit fadein3" style="color: black">Current Top Midfielders</h1>
+    <table class="table fadein3" id="myTable2">
+        <thead class="kanit">
+            <tr style="color: black">
+                <th scope="col" onclick="sortTableL(0)">Name</th>
+                <th scope="col" onclick="sortTableL(1)">Team</th>
+                <th scope="col" onclick="sortTableN(2)">Average Points</th>
+                <th scope="col" onclick="sortTableN(3)">xG Per 90</th>
+                <th scope="col" onclick="sortTableN(4)">xA Per 90</th>
+                <th scope="col" onclick="sortTableN(5)">Price</th>
+                <th scope="col" onclick="sortTableN(6)">Points Per Million</th>
+            </tr>
+        </thead>
+        <tbody class="kanit" style="color: black">
+            {% for line in topcurrentmidfielders %}
+                <tr >
+                    <td>{{ line.name }}</td>
+                    <td>{{ line.team }}</td>
+                    <td>{{ line.averagepoints }}</td>
+                    <td>{{ line.xG }}</td>
+                    <td>{{ line.xA }}</td>
+                    <td>{{ line.value }}</td>
+                    <td>{{ line.pointspermili }}</td>
+
+                    {% endfor %}
+        </tr>
+    </tbody>
+    </table>
+    </div>
+
+
+<div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
+    <h1 class="kanit fadein3" style="color: black">Current Top Defenders</h1>
+    <table class="table fadein3">
+        <thead class="kanit">
+            <tr style="color: black">
+                <th scope="col">Name</th>
+                <th scope="col">Team</th>
+                <th scope="col">Average Points</th>
+                <th scope="col">Price</th>
+                <th scope="col">Points Per Million</th>
+            </tr>
+        </thead>
+        <tbody class="kanit" style="color: black">
+            {% for line in topcurrentdefenders %}
+                <tr >
+                    <td>{{ line.name }}</td>
+                    <td>{{ line.team }}</td>
+                    <td>{{ line.averagepoints }}</td>
+                    <td>{{ line.value }}</td>
+                    <td>{{ line.pointspermili }}</td>
+
+                    {% endfor %}
+        </tr>
+    </tbody>
+    </table>
+    </div>
+
+
+<div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
+    <h1 class="kanit fadein3" style="color: black">Current Top Goalkeepers</h1>
+    <table class="table fadein3">
+        <thead class="kanit">
+            <tr style="color: black">
+                <th scope="col">Name</th>
+                <th scope="col">Team</th>
+                <th scope="col">Average Points</th>
+                <th scope="col">Price</th>
+                <th scope="col">Points Per Million</th>
+            </tr>
+        </thead>
+        <tbody class="kanit" style="color: black">
+            {% for line in topcurrentgoalkeepers %}
+                <tr >
+                    <td>{{ line.name }}</td>
+                    <td>{{ line.team }}</td>
+                    <td>{{ line.averagepoints }}</td>
+                    <td>{{ line.value }}</td>
+                    <td>{{ line.pointspermili }}</td>
+
+                    {% endfor %}
+    </tr>
+    </tbody>
+    </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Player Stats
+{% endblock %}
+{% block head %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+</script>
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+    rel="stylesheet" type="text/css" />
+</head>
+<script>
+
+    $( function() {
+      var availableTags = [
+          {% for player in playernames %}
+              "{{player}}",
+          {% endfor %}
+      ];
+      $( "#tags" ).autocomplete({
+        source: availableTags
+      });
+    } )
+    </script>
+{% endblock %}
+
+{% block main %}
+
+    <h3 class="center kanit">Search Player Stats</h3>
+    </div>
+    <div class="fadein2" style="background: #b9b6f2; width: 100%; height: 500px">
+        <div style="margin: auto">
+        <form method="POST" action="/playerstats" style="align-items: middle" autocomplete="off">
+            <button type="submit" class="btn btn-primary button-large top" style="margin: auto; margin-top: 5px">Search</button>
+            <div class="autocomplete">
+            <input name="nameweb" id="tags" class="form-control" type="text" placeholder="Player Name" aria-label="default input example" style="width: 200px; margin: auto; text-align: center">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
