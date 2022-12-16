@@ -103,35 +103,36 @@ function sortTableN(n) {
 
 {% block main %}
 
-    <a class="btn btn-primary center" style="display: block; margin: auto; width: 100px;" href="/search" role="button">Search Again</a>
+    <a class="btn btn-primary center" style="display: block; margin: auto; width: 150px;" href="/search" role="button">Search Again</a>
     </div>
     <div style="background: #b9b6f2; color: black">
-        <h1 class="kanit fadein2" style="color: black">Results</h1>
-        <table class="table fadein3" id = "myTable2">
-            <thead class="kanit">
-                <tr style="color: black">
-                    <th scope="col">Position</th>
-                    <th scope="col" onclick="sortTableL(1)">Name</th>
-                    <th scope="col" onclick="sortTableL(2)">Team</th>
-                    <th scope="col" onclick="sortTableN(3)">Average Points</th>
-                    <th scope="col" onclick="sortTableN(4)">FDR</th>
-                    <th scope="col" onclick="sortTableN(5)">Price</th>
-                    <th scope="col" onclick="sortTableN(6)">Points Per Million</th>
-
-                </tr>
-            </thead>
-            <tbody class="kanit" style="color: black">
-                {% for player in playerlist %}
-                    <tr>
-                        <td>{{ player.position }}</td>
-                        <td>{{ player.name }}</td>
-                        <td>{{ player.team }}</td>
-                        <td>{{ player.averagepoints }}</td>
-                        <td>{{ player.FDR }}</td>
-                        <td>{{ player.value }}</td>
-                        <td>{{ player.pointspermili }}</td>
-
-                        <td>
+      <h1 class="kanit fadein2" style="color: black">Results</h1>
+      <table class="table fadein3" id = "myTable2">
+        <thead class="kanit">
+          <tr style="color: black">
+            <th scope="col">Position</th>
+            <th scope="col" onclick="sortTableL(1)">Name</th>
+            <th scope="col" onclick="sortTableL(2)">Team</th>
+            <th scope="col" onclick="sortTableN(3)">Average Points</th>
+            <th scope="col" onclick="sortTableN(4)">FDR</th>
+            <th scope="col" onclick="sortTableN(5)">Price</th>
+            <th scope="col" onclick="sortTableN(6)">Points Per Million</th>
+          </tr>
+        </thead>
+        <tbody class="kanit" style="color: black">
+          {% for player in playerlist %}
+          <tr>
+            <td>{{ player.position }}</td>
+            <td>{{ player.name }}</td>
+            <td>{{ player.team }}</td>
+            <td>{{ player.averagepoints }}</td>
+            <td>{{ player.FDR }}</td>
+            <td>{{ player.value }}</td>
+            <td>{{ player.pointspermili }}</td>
+          </tr>
                 {% endfor %}
-
+            </tbody>
+        </table>
+      </div>
+          
     {% endblock %}

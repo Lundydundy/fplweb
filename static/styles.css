@@ -196,7 +196,7 @@
     height: 100%;
     width: 100%;
 
-    font-family:"Monaco", monospace;
+    font-family: "Kanit", sans-serif;
     font-size: 110%;
 
     display: grid;
@@ -219,8 +219,7 @@
     height: 100%;
     width: 90%;
     margin: auto;
-
-    font-family:"Monaco", monospace;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 110%;
 
     display: grid;

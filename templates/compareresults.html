@@ -12,8 +12,8 @@
 <div class="containercompareresults" style="background: #d0eaf2; font-size: 20px;">
     <div></div>
     <div style="height: 100%; background: #b9b6f2; color: black">
-        <div>
-        <h1 class="center kanit fadein2" style="width: 70%; margin: auto; color: black; background: white; border: solid black">{{ name1 }} - £{{pricep1}}</h1>
+        <div style="margin-top: 10px; margin-bottom: 1rem;">
+        <h1 class="center kanit fadein2" id="h1" style="width: 70%; margin: auto; color: black; background: white; border: solid black">{{ name1 }} - £{{pricep1}}</h1>
         <table class="table fadein3" style="margin: auto; border: solid; background: white; height: 100px; width: 75%; margin-top: 10px;">
             <thead class="kanit" style="color: black">
                 <tr>
@@ -65,8 +65,8 @@
 </div>
 
     <div style="height: 100%; background: #b9b6f2; color: black">
-        <div>
-        <h1 class="center kanit fadein2" style="width: 70%; margin: auto; color: black; background: white; border: solid black">{{ name2 }} - £{{pricep2}}</h1>
+        <div style="margin-top: 10px">
+        <h1 class="center kanit fadein2" id="h2" style="width: 70%; margin: auto; color: black; background: white; border: solid black">{{ name2 }} - £{{pricep2}}</h1>
         <table class="table fadein3" style="margin: auto; border: solid; background: white; height: 100px; width: 75%; margin-top: 10px;">
             <thead class="kanit" style="color: black">
                 <tr>
@@ -118,6 +118,40 @@
     </div>
 </div>
 <script>
+    if (document.getElementById("h1").innerText.includes('Gabriel dos Santos Magalhães')){
+        document.getElementById("h1").innerText = "Gabriel - £{{pricep1}}";
+    }
+    else if (document.getElementById("h2").innerText.includes('Gabriel dos Santos Magalhães')){
+        document.getElementById("h2").innerText = "Gabriel - £{{pricep2}}";
+    }
+    else if (document.getElementById("h1").innerText.includes('Gabriel Fernando de Jesus')){
+        document.getElementById("h1").innerText = "Jesus - £{{pricep1}}";
+    }
+    else if (document.getElementById("h2").innerText.includes('Gabriel Fernando de Jesus')){
+        document.getElementById("h2").innerText = "Jesus - £{{pricep2}}";
+    }
+    else if (document.getElementById("h1").innerText.includes('Gabriel Martinelli Silva')){
+        document.getElementById("h1").innerText = "Gabriel Martinelli - £{{pricep1}}";
+    }
+    else if (document.getElementById("h2").innerText.includes('Gabriel Martinelli Silva')){
+        document.getElementById("h2").innerText = "Gabriel Martinelli - £{{pricep2}}";
+    }
+    else if (document.getElementById("h1").innerText.includes('Bernardo Veiga de Carvalho e Silva')){
+        document.getElementById("h1").innerText = "Bernardo Silva - £{{pricep1}}";
+    }
+    else if (document.getElementById("h2").innerText.includes('Bernardo Veiga de Carvalho e Silva')){
+        document.getElementById("h2").innerText = "Bernardo Silva - £{{pricep2}}";
+    }
+    else if (document.getElementById("h1").innerText.includes('Antony Matheus dos Santos')){
+        document.getElementById("h1").innerText = "Antony - £{{pricep1}}";
+    }
+    else if (document.getElementById("h2").innerText.includes('Antony Matheus dos Santos')){
+        document.getElementById("h2").innerText = "Antony - £{{pricep2}}";
+    }
+    
+</script>
+<script>
+
     var minutes1e = document.getElementById("minutes1");
     var minutes2e = document.getElementById("minutes2");
     var minutes1 = parseInt(minutes1e.innerHTML);
