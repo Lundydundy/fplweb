@@ -4,7 +4,7 @@ from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 db = SQL("sqlite:///fpl.db")
 
-names = db.execute("SELECT first_name, second_name, now_cost FROM players")
+names = db.execute("SELECT first_name, second_name, now_cost FROM cleaned_players")
 
 player = {}
 finalist = []
@@ -18,4 +18,4 @@ for line in names:
 for line in finalist:
     name = line["name"]
     cost = line["value"]
-    db.execute("UPDATE fpl SET value = ? WHERE name LIKE ?", cost, "%" + name + "%")
+    db.execute("UPDATE merged_gw SET value = ? WHERE name LIKE ?", cost, "%" + name + "%")

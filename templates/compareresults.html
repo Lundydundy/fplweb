@@ -9,85 +9,306 @@
 
 <a class="btn btn-primary center" style="display: block; margin: auto; width: 150px;" href="/compareplayers" role="button">Search Again</a>
 </div>
-<div class="containercompareresults" style="background: #d0eaf2">
+<div class="containercompareresults" style="background: #d0eaf2; font-size: 20px;">
     <div></div>
     <div style="height: 100%; background: #b9b6f2; color: black">
         <div>
-        <h1 class="center kanit fadein2" style="width: 70%; margin-left: 75px; color: black; background: white; border: solid black">{{ name1 }} - £{{pricep1}}</h1>
-        <table class="table fadein3" style="border: solid; background: white; height: 100px">
-            <thead class="kanit">
-                <tr style="color: black">
-                    <th scope="col">Gameweek</th>
+        <h1 class="center kanit fadein2" style="width: 70%; margin: auto; color: black; background: white; border: solid black">{{ name1 }} - £{{pricep1}}</h1>
+        <table class="table fadein3" style="margin: auto; border: solid; background: white; height: 100px; width: 75%; margin-top: 10px;">
+            <thead class="kanit" style="color: black">
+                <tr>
                     <th scope="col">Minutes Played</th>
+                    {% for player in statp1 %}
+                    <td id="minutes1">{{ player.minutes }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <th scope="col">Goals Scored</th>
+                    {% for player in statp1 %}
+                    <td id="goalsscored1">{{ player.goals_scored }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
                     <th scope="col">Assists</th>
+                    {% for player in statp1 %}
+                    <td id="assists1">{{ player.assists }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <th scope="col">Yellow Cards</th>
+                    {% for player in statp1 %}
+                    <td id="yellowcards1">{{ player.yellow_cards }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <th scope="col">Red Cards</th>
-                    <th scope="col">Influence</th>
-                    <th scope="col">Points</th>
-                    <th scope="col">Opposition</th>
+                    {% for player in statp1 %}
+                    <td id="redcards1">{{ player.red_cards }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="col">Average Influence</th>
+                    {% for player in statp1 %}
+                    <td id="influence1">{{ player.average_influence }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="col">Total Points</th>
+                    {% for player in statp1 %}
+                    <td id="totalpoints1">{{ player.total_points }}</td>
+                    {% endfor %}
                 </tr>
             </thead>
-            <tbody class="kanit" style="color: black">
-                {% for player in statp1 %}
-                    <tr>
-                        <td>{{ player.GW }}</td>
-                        <td>{{ player.minutes }}</td>
-                        <td>{{ player.goals_scored }}</td>
-                        <td>{{ player.assists }}</td>
-                        <td>{{ player.yellow_cards }}</td>
-                        <td>{{ player.red_cards }}</td>
-                        <td>{{ player.influence }}</td>
-                        <td>{{ player.total_points }}</td>
-                        <td>{{ player.name1 }}</td>
-
-                        <td>
-                {% endfor %}
-</td>
-</tr>
-</tbody>
-</table>
-</div>
+        </table>
+    </div>
 </div>
 
     <div style="height: 100%; background: #b9b6f2; color: black">
         <div>
-        <h1 class="center kanit fadein2" style="width: 70%; margin-left: 75px; color: black; background: white; border: solid black">{{ name2 }} - £{{pricep2}}</h1>
-        <table class="table fadein3" style="margin: auto; border: solid; background: white; height: 100px">
-            <thead class="kanit">
-                <tr style="color: black">
-                    <th scope="col">Gameweek</th>
+        <h1 class="center kanit fadein2" style="width: 70%; margin: auto; color: black; background: white; border: solid black">{{ name2 }} - £{{pricep2}}</h1>
+        <table class="table fadein3" style="margin: auto; border: solid; background: white; height: 100px; width: 75%; margin-top: 10px;">
+            <thead class="kanit" style="color: black">
+                <tr>
                     <th scope="col">Minutes Played</th>
+                    {% for player in statp2 %}
+                    <td id="minutes2">{{ player.minutes }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <th scope="col">Goals Scored</th>
+                    {% for player in statp2 %}
+                    <td id="goalsscored2">{{ player.goals_scored }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
                     <th scope="col">Assists</th>
+                    {% for player in statp2 %}
+                    <td id="assists2">{{ player.assists }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <th scope="col">Yellow Cards</th>
+                    {% for player in statp2 %}
+                    <td id="yellowcards2">{{ player.yellow_cards }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <th scope="col">Red Cards</th>
-                    <th scope="col">Influence</th>
-                    <th scope="col">Points</th>
-                    <th scope="col">Opposition</th>
+                    {% for player in statp2 %}
+                    <td id="redcards2">{{ player.red_cards }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="col">Average Influence</th>
+                    {% for player in statp2 %}
+                    <td id="influence2">{{ player.average_influence }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="col">Total Points</th>
+                    {% for player in statp2 %}
+                    <td id="totalpoints2">{{ player.total_points }}</td>
+                    {% endfor %}
                 </tr>
             </thead>
-            <tbody class="kanit" style="color: black">
-                {% for player2 in statp2 %}
-                    <tr>
-                        <td>{{ player2.GW }}</td>
-                        <td>{{ player2.minutes }}</td>
-                        <td>{{ player2.goals_scored }}</td>
-                        <td>{{ player2.assists }}</td>
-                        <td>{{ player2.yellow_cards }}</td>
-                        <td>{{ player2.red_cards }}</td>
-                        <td>{{ player2.influence }}</td>
-                        <td>{{ player2.total_points }}</td>
-                        <td>{{ player2.name1 }}</td>
 
-                        <td>
-                {% endfor %}
-</td>
-</tr>
-</tbody>
-</table>
+        </table>
+    </div>
 </div>
-</div>
+<script>
+    var minutes1e = document.getElementById("minutes1");
+    var minutes2e = document.getElementById("minutes2");
+    var minutes1 = parseInt(minutes1e.innerHTML);
+    var minutes2 = parseInt(minutes2e.innerHTML);
+    
+    if (minutes1 > minutes2){
+        minutes1e.style.color = 'white';
+        minutes2e.style.color = 'white';
+        minutes1e.style.backgroundColor = 'green';
+        minutes2e.style.backgroundColor = 'red';
 
+    }
+    else if (minutes1 == minutes2){
+        minutes1e.style.color = 'black';
+        minutes2e.style.color = 'black';
+        minutes1e.style.backgroundColor = 'orange';
+        minutes2e.style.backgroundColor = 'orange';
+
+    }
+    else{
+        minutes1e.style.color = 'white';
+        minutes2e.style.color = 'white';
+        minutes1e.style.backgroundColor = 'red';
+        minutes2e.style.backgroundColor = 'green';
+    }
+</script>
+<script>
+    var goalsscored1e = document.getElementById("goalsscored1");
+    var goalsscored2e = document.getElementById("goalsscored2");
+    var goalsscored1 = parseInt(goalsscored1e.innerHTML);
+    var goalsscored2 = parseInt(goalsscored2e.innerHTML);
+    
+    if (goalsscored1 > goalsscored2){
+        goalsscored1e.style.color = 'white';
+        goalsscored2e.style.color = 'white';
+        goalsscored1e.style.backgroundColor = 'green';
+        goalsscored2e.style.backgroundColor = 'red';
+
+    }
+    else if (goalsscored1 == goalsscored2){
+        goalsscored1e.style.color = 'white';
+        goalsscored2e.style.color = 'white';
+        goalsscored1e.style.backgroundColor = 'orange';
+        goalsscored2e.style.backgroundColor = 'orange';
+
+    }
+    else{
+        goalsscored1e.style.color = 'white';
+        goalsscored2e.style.color = 'white';
+        goalsscored1e.style.backgroundColor = 'red';
+        goalsscored2e.style.backgroundColor = 'green';
+
+    }
+
+</script>
+<script>
+    var assists1e = document.getElementById("assists1");
+    var assists2e = document.getElementById("assists2");
+    var assists1 = parseInt(assists1e.innerHTML);
+    var assists2 = parseInt(assists2e.innerHTML);
+    
+    if (assists1 > assists2){
+        assists1e.style.color = 'white';
+        assists2e.style.color = 'white';
+        assists1e.style.backgroundColor = 'green';
+        assists2e.style.backgroundColor = 'red';
+
+    }
+    else if (assists1 == assists2){
+ 
+        assists1e.style.color = 'white';
+        assists2e.style.color = 'white';
+        assists1e.style.backgroundColor = 'orange';
+        assists2e.style.backgroundColor = 'orange';
+
+    }
+    else{
+        assists1e.style.color = 'white';
+        assists2e.style.color = 'white';
+        assists1e.style.backgroundColor = 'red';
+        assists2e.style.backgroundColor = 'green';
+    }
+</script>
+<script>
+    var yellowcards1e = document.getElementById("yellowcards1");
+    var yellowcards2e = document.getElementById("yellowcards2");
+    var yellowcards1 = parseInt(yellowcards1e.innerHTML);
+    var yellowcards2 = parseInt(yellowcards2e.innerHTML);
+    
+    if (yellowcards1 < yellowcards2){
+        yellowcards1e.style.color = 'white';
+        yellowcards2e.style.color = 'white';
+        yellowcards1e.style.backgroundColor = 'green';
+        yellowcards2e.style.backgroundColor = 'red';
+    }
+    else if (yellowcards1 == yellowcards2){
+        yellowcards1e.style.color = 'white';
+        yellowcards2e.style.color = 'white';
+        yellowcards1e.style.backgroundColor = 'orange';
+        yellowcards2e.style.backgroundColor = 'orange';
+
+    }
+    else{
+        yellowcards1e.style.color = 'white';
+        yellowcards2e.style.color = 'white';
+        yellowcards1e.style.backgroundColor = 'red';
+        yellowcards2e.style.backgroundColor = 'green';
+
+    }
+</script>
+<script>
+    var redcards1e = document.getElementById("redcards1");
+    var redcards2e = document.getElementById("redcards2");
+    var redcards1 = parseInt(redcards1e.innerHTML);
+    var redcards2 = parseInt(redcards2e.innerHTML);
+    
+    if (redcards1 < redcards2){
+        redcards1e.style.color = 'white';
+        redcards2e.style.color = 'white';
+        redcards1e.style.backgroundColor = 'green';
+        redcards2e.style.backgroundColor = 'red';
+    }
+    else if (redcards1 == redcards2){
+        redcards1e.style.color = 'white';
+        redcards2e.style.color = 'white';
+        redcards1e.style.backgroundColor = 'orange';
+        redcards2e.style.backgroundColor = 'orange';
+
+    }
+    else{
+        redcards1e.style.color = 'white';
+        redcards2e.style.color = 'white';
+        redcards1e.style.backgroundColor = 'red';
+        redcards2e.style.backgroundColor = 'green';
+
+    }
+</script>
+<script>
+    var influence1e = document.getElementById("influence1");
+    var influence2e = document.getElementById("influence2");
+    var influence1 = parseFloat(influence1e.innerHTML);
+    var influence2 = parseFloat(influence2e.innerHTML);
+    
+    if (influence1 > influence2){
+        influence1e.style.color = 'white';
+        influence2e.style.color = 'white';
+        influence1e.style.backgroundColor = 'green';
+        influence2e.style.backgroundColor = 'red';
+    }
+    else if (influence1 == influence2){
+        influence1e.style.color = 'white';
+        influence2e.style.color = 'white';
+        influence1e.style.backgroundColor = 'orange';
+        influence2e.style.backgroundColor = 'orange';
+
+    }
+    else{
+        influence1e.style.color = 'white';
+        influence2e.style.color = 'white';
+        influence1e.style.backgroundColor = 'red';
+        influence2e.style.backgroundColor = 'green';
+
+    }
+</script>
+<script>
+    var totalpoints1e = document.getElementById("totalpoints1");
+    var totalpoints2e = document.getElementById("totalpoints2");
+    var totalpoints1 = parseInt(totalpoints1e.innerHTML);
+    var totalpoints2 = parseInt(totalpoints2e.innerHTML);
+    
+    if (totalpoints1 > totalpoints2){
+        totalpoints1e.style.color = 'white';
+        totalpoints2e.style.color = 'white';
+        totalpoints1e.style.backgroundColor = 'green';
+        totalpoints2e.style.backgroundColor = 'red';
+    }
+    else if (totalpoints1 == totalpoints2){
+        totalpoints1e.style.color = 'white';
+        totalpoints2e.style.color = 'white';
+        totalpoints1e.style.backgroundColor = 'orange';
+        totalpoints2e.style.backgroundColor = 'orange';
+
+    }
+    else{
+        totalpoints1e.style.color = 'white';
+        totalpoints2e.style.color = 'white';
+        totalpoints1e.style.backgroundColor = 'red';
+        totalpoints2e.style.backgroundColor = 'green';
+
+    }
+
+</script>
 
 {% endblock %}

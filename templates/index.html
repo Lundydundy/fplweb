@@ -5,9 +5,10 @@
 {% endblock %}
 {% block head %}
 <script>
-    function sortTableL(n) {
+
+    function sortTableL0(n) {
       var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-      table = document.getElementById("myTable2");
+      table = document.getElementById("currenttopplayers");
       switching = true;
       // Set the sorting direction to ascending:
       dir = "asc";
@@ -62,9 +63,9 @@
     </script>
 
 <script>
-    function sortTableN(n) {
+    function sortTableN0(n) {
       var table, rows, switching, i, x, y, shouldSwitch;
-      table = document.getElementById("myTable2");
+      table = document.getElementById("currenttopplayers");
       switching = true;
       /*Make a loop that will continue until
       no switching has been done:*/
@@ -97,30 +98,403 @@
       }
     }
     </script>
+ <script>   
+function sortTableL1(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("topforwards");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
 
+<script>
+function sortTableN1(n) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("topforwards");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
+<script>
+function sortTableL2(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("topmidfielders");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
+<script>
+function sortTableN2(n) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("topmidfielders");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
+<script>
+function sortTableL3(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("topdefenders");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
+<script>
+function sortTableN3(n) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("topdefenders");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
+<script>
+
+  function sortTableL4(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("topgoalkeepers");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        /* Check if the two rows should switch place,
+        based on the direction, asc or desc: */
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        // Each time a switch is done, increase this count by 1:
+        switchcount ++;
+      } else {
+        /* If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again. */
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
+  </script>
+
+<script>
+  function sortTableN4(n) {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("topgoalkeepers");
+    switching = true;
+    /*Make a loop that will continue until
+    no switching has been done:*/
+    while (switching) {
+      //start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /*Loop through all table rows (except the
+      first, which contains table headers):*/
+      for (i = 1; i < (rows.length - 1); i++) {
+        //start by saying there should be no switching:
+        shouldSwitch = false;
+        /*Get the two elements you want to compare,
+        one from current row and one from the next:*/
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        //check if the two rows should switch place:
+        if (Number(x.innerHTML) < Number(y.innerHTML)) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        /*If a switch has been marked, make the switch
+        and mark that a switch has been done:*/
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
+  </script>
 
     {% endblock %}
 
 
 {% block main %}
 
-<h3 class="center kanit">Latest Gameweek: {{ GW }}</h3>
+<h3 class="center kanit">Latest Gameweek: {{ GW1 }} </h3>
 <h5 class="center kanit fadein3" style="color: black">Current form is based on last 3 matches</h5>
 
 </div>
 <div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
     <h1 class="kanit fadein3" style=" color: black">Current Top Players</h1>
-    <table class="table fadein3" id ="myTable2">
+    <table class="table fadein3" id ="currenttopplayers">
         <thead class="kanit">
             <tr style="color: black">
                 <th scope="col">Position</th>
-                <th scope="col" onclick="sortTableL(1)">Name</th>
-                <th scope="col" onclick="sortTableL(2)">Team</th>
-                <th scope="col" onclick="sortTableN(3)">Average Points</th>
-                <th scope="col" onclick="sortTableN(4)">Average xG Per 90</th>
-                <th scope="col" onclick="sortTableN(5)">Average xA Per 90</th>
-                <th scope="col" onclick="sortTableN(6)">Price</th>
-                <th scope="col" onclick="sortTableN(7)">Points Per Million</th>
+                <th 
+                scope="col" onclick="sortTableL0(1)">Name</th>
+                <th scope="col" onclick="sortTableL0(2)">Team</th>
+                <th scope="col" onclick="sortTableN0(3)">Average Points</th>
+                <th scope="col" onclick="sortTableN0(4)">Average xG Per 90</th>
+                <th scope="col" onclick="sortTableN0(5)">Average xA Per 90</th>
+                <th scope="col" onclick="sortTableN0(6)">Price</th>
+                <th scope="col" onclick="sortTableN0(7)">Points Per Million</th>
             </tr>
         </thead>
         <tbody class="kanit" style="color: black">
@@ -131,7 +505,7 @@
                     <td>{{ line.team }}</td>
                     <td>{{ line.averagepoints }}</td>
                     <td>{{ line.xG }}</td>
-                    <td>{{ line.xA }}</td>
+                    <td>{{ line.expected_assists }}</td>
                     <td>{{ line.value }}</td>
                     <td>{{ line.pointspermili }}</td>
 
@@ -143,16 +517,16 @@
 
 <div class="fadein2" style= "width: 85%; background: #b9b6f2; color: black; margin: auto">
     <h1 class="kanit fadein3" style="color: black">Current Top Forwards</h1>
-    <table class="table fadein3">
+    <table class="table fadein3" id ="topforwards">
         <thead class="kanit">
             <tr style="color: black">
-                <th scope="col">Name</th>
-                <th scope="col">Team</th>
-                <th scope="col">Average Points</th>
-                <th scope="col">xG Per 90</th>
-                <th scope="col">xA Per 90</th>
-                <th scope="col">Price</th>
-                <th scope="col">Points Per Million</th>
+                <th scope="col" onclick="sortTableL1(1)">Name</th>
+                <th scope="col" onclick="sortTableL1(2)">Team</th>
+                <th scope="col" onclick="sortTableN1(3)">Average Points</th>
+                <th scope="col" onclick="sortTableN1(4)">xG Per 90</th>
+                <th scope="col" onclick="sortTableN1(5)">xA Per 90</th>
+                <th scope="col" onclick="sortTableN1(6)">Price</th>
+                <th scope="col" onclick="sortTableN1(7)">Points Per Million</th>
             </tr>
         </thead>
         <tbody class="kanit" style="color: black">
@@ -162,7 +536,7 @@
                     <td>{{ line.team }}</td>
                     <td>{{ line.averagepoints }}</td>
                     <td>{{ line.xG }}</td>
-                    <td>{{ line.xA }}</td>
+                    <td>{{ line.expected_assists }}</td>
                     <td>{{ line.value }}</td>
                     <td>{{ line.pointspermili }}</td>
                     {% endfor %}
@@ -173,16 +547,16 @@
 
 <div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
     <h1 class="kanit fadein3" style="color: black">Current Top Midfielders</h1>
-    <table class="table fadein3" id="myTable2">
+    <table class="table fadein3" id="topmidfielders">
         <thead class="kanit">
             <tr style="color: black">
-                <th scope="col" onclick="sortTableL(0)">Name</th>
-                <th scope="col" onclick="sortTableL(1)">Team</th>
-                <th scope="col" onclick="sortTableN(2)">Average Points</th>
-                <th scope="col" onclick="sortTableN(3)">xG Per 90</th>
-                <th scope="col" onclick="sortTableN(4)">xA Per 90</th>
-                <th scope="col" onclick="sortTableN(5)">Price</th>
-                <th scope="col" onclick="sortTableN(6)">Points Per Million</th>
+                <th scope="col" onclick="sortTableL2(0)">Name</th>
+                <th scope="col" onclick="sortTableL2(1)">Team</th>
+                <th scope="col" onclick="sortTableN2(2)">Average Points</th>
+                <th scope="col" onclick="sortTableN2(3)">xG Per 90</th>
+                <th scope="col" onclick="sortTableN2(4)">xA Per 90</th>
+                <th scope="col" onclick="sortTableN2(5)">Price</th>
+                <th scope="col" onclick="sortTableN2(6)">Points Per Million</th>
             </tr>
         </thead>
         <tbody class="kanit" style="color: black">
@@ -192,7 +566,7 @@
                     <td>{{ line.team }}</td>
                     <td>{{ line.averagepoints }}</td>
                     <td>{{ line.xG }}</td>
-                    <td>{{ line.xA }}</td>
+                    <td>{{ line.expected_assists }}</td>
                     <td>{{ line.value }}</td>
                     <td>{{ line.pointspermili }}</td>
 
@@ -205,14 +579,15 @@
 
 <div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
     <h1 class="kanit fadein3" style="color: black">Current Top Defenders</h1>
-    <table class="table fadein3">
+    <table class="table fadein3" id="topdefenders">
         <thead class="kanit">
             <tr style="color: black">
-                <th scope="col">Name</th>
-                <th scope="col">Team</th>
-                <th scope="col">Average Points</th>
-                <th scope="col">Price</th>
-                <th scope="col">Points Per Million</th>
+                <th scope="col" onclick="sortTableL3(0)">Name</th>
+                <th scope="col" onclick="sortTableL3(1)"> Team</th>
+                <th scope="col" onclick="sortTableN3(2)">Average Points</th>
+                <th scope="col" onclick="sortTableN3(3)">Average Goals Conceded</th>
+                <th scope="col" onclick="sortTableN3(4)">Price</th>
+                <th scope="col" onclick="sortTableN3(5)">Points Per Million</th>
             </tr>
         </thead>
         <tbody class="kanit" style="color: black">
@@ -221,6 +596,7 @@
                     <td>{{ line.name }}</td>
                     <td>{{ line.team }}</td>
                     <td>{{ line.averagepoints }}</td>
+                    <td>{{ line.goals_conceded }}</td>
                     <td>{{ line.value }}</td>
                     <td>{{ line.pointspermili }}</td>
 
@@ -233,14 +609,15 @@
 
 <div class="fadein2" style="width: 85%; background: #b9b6f2; color: black; margin: auto">
     <h1 class="kanit fadein3" style="color: black">Current Top Goalkeepers</h1>
-    <table class="table fadein3">
+    <table class="table fadein3" id="topgoalkeepers">
         <thead class="kanit">
             <tr style="color: black">
-                <th scope="col">Name</th>
-                <th scope="col">Team</th>
-                <th scope="col">Average Points</th>
-                <th scope="col">Price</th>
-                <th scope="col">Points Per Million</th>
+                <th scope="col" onclick="sortTableL4(0)">Name</th>
+                <th scope="col" onclick="sortTableL4(1)">Team</th>
+                <th scope="col" onclick="sortTableN4(2)">Average Points</th>
+                <th scope="col" onclick="sortTableN4(3)">Average Goals Conceded</th>
+                <th scope="col" onclick="sortTableN4(4)">Price</th>
+                <th scope="col" onclick="sortTableN4(5)">Points Per Million</th>
             </tr>
         </thead>
         <tbody class="kanit" style="color: black">
@@ -249,6 +626,7 @@
                     <td>{{ line.name }}</td>
                     <td>{{ line.team }}</td>
                     <td>{{ line.averagepoints }}</td>
+                    <td>{{ line.goals_conceded }}</td>
                     <td>{{ line.value }}</td>
                     <td>{{ line.pointspermili }}</td>
 

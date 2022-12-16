@@ -16,7 +16,7 @@ db = SQL("sqlite:///fpl.db")
 
 
 #opens player data and creates a gameweek list
-with open('merged_gw.csv', 'r', encoding="utf8") as file:
+with open('merged_gw1.csv', 'r', encoding="utf8") as file:
     reader = DictReader(file)
     list1 = []
     for line in reader:
@@ -65,13 +65,13 @@ def after_request(response):
 @app.route("/")
 def index():
     index = render_template("index.html")
-    topcurrentplayers = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 10", int(GW[0]), int(GW[1]), int(GW[2]))
-    topcurrentforwards = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints',value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE position = 'FWD' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
-    topcurrentmidfielders = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE position = 'MID' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
-    topcurrentdefenders = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE position = 'DEF' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
-    topcurrentgoalkeepers = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE position = 'GK' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
+    topcurrentplayers = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 10", 16, 15, 14)
+    topcurrentforwards = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints',value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE position = 'FWD' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
+    topcurrentmidfielders = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE position = 'MID' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
+    topcurrentdefenders = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', ROUND(AVG(goals_conceded), 2) AS 'goals_conceded', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE position = 'DEF' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
+    topcurrentgoalkeepers = db.execute("SELECT position, name, team, SUM(minutes) AS 'totalminutes', ROUND(AVG(total_points)) AS 'averagepoints', ROUND(AVG(goals_conceded), 2) AS 'goals_conceded', SUM(total_points) AS 'overallpoints', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE position = 'GK' AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC LIMIT 5", int(GW[0]), int(GW[1]), int(GW[2]))
 
-    return render_template("index.html", topcurrentplayers = topcurrentplayers, topcurrentforwards = topcurrentforwards, topcurrentmidfielders = topcurrentmidfielders, topcurrentdefenders = topcurrentdefenders, topcurrentgoalkeepers = topcurrentgoalkeepers, GW = GW[0], index=index)
+    return render_template("index.html", GW1 = GW[0], topcurrentplayers = topcurrentplayers, topcurrentforwards = topcurrentforwards, topcurrentmidfielders = topcurrentmidfielders, topcurrentdefenders = topcurrentdefenders, topcurrentgoalkeepers = topcurrentgoalkeepers, index=index)
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
@@ -94,14 +94,13 @@ def search():
         position = request.form.get('position')
         if request.form.get('form') == "Current Form":
             if position == "All" and team == "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", int(GW[0]), int(GW[1]), int(GW[2]))
-
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", int(GW[0]), int(GW[1]), int(GW[2]))
             elif team == "All" and position != "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE position LIKE ? AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", position, int(GW[0]), int(GW[1]), int(GW[2]))
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE position LIKE ? AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", position, int(GW[0]), int(GW[1]), int(GW[2]))
             elif team != "All" and position == "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE team = ? AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", team, int(GW[0]), int(GW[1]), int(GW[2]))
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE team = ? AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", team, int(GW[0]), int(GW[1]), int(GW[2]))
             elif team != "All" and position != "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(xG), 2) AS xG, ROUND(AVG(xA), 2) AS xA FROM fpl WHERE team = ? AND position = ? AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", team, position, int(GW[0]), int(GW[1]), int(GW[2]))
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', ROUND(AVG(expected_goals), 2) AS xG, ROUND(AVG(expected_assists), 2) AS expected_assists FROM merged_gw WHERE team = ? AND position = ? AND (GW = ? OR GW = ? OR GW = ?) GROUP BY name ORDER BY (AVG(total_points)) DESC", team, position, int(GW[0]), int(GW[1]), int(GW[2]))
             else:
                 return apology("error", 400)
             playerlist = []
@@ -137,13 +136,13 @@ def search():
 
         else:
             if position == "All" and team == "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(xG) AS xG, AVG(xA) AS xA FROM fpl GROUP BY name ORDER BY (AVG(total_points)) DESC")
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(expected_goals) AS xG, AVG(expected_assists) AS expected_assists FROM merged_gw GROUP BY name ORDER BY (AVG(total_points)) DESC")
             elif team != "All" and position == "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(xG) AS xG, AVG(xA) AS xA FROM fpl WHERE team LIKE ? GROUP BY name ORDER BY (AVG(total_points)) DESC", team)
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(expected_goals) AS xG, AVG(expected_assists) AS expected_assists FROM merged_gw WHERE team LIKE ? GROUP BY name ORDER BY (AVG(total_points)) DESC", team)
             elif team == "All" and position != "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(xG) AS xG, AVG(xA) AS xA FROM fpl WHERE position LIKE ? GROUP BY name ORDER BY (AVG(total_points)) DESC", position)
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(expected_goals) AS xG, AVG(expected_assists) AS expected_assists FROM merged_gw WHERE position LIKE ? GROUP BY name ORDER BY (AVG(total_points)) DESC", position)
             elif team != "All" and position != "All":
-                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(xG) AS xG, AVG(xA) AS xA FROM fpl WHERE team LIKE ? AND position LIKE ? GROUP BY name ORDER BY (AVG(total_points)) DESC",team, position)
+                rows = db.execute("SELECT position, name, team, SUM(minutes) AS 'total minutes', ROUND(AVG(total_points)) AS 'average points', ROUND(AVG(influence)) AS 'average influence', SUM(total_points) AS 'overall points', value, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili', AVG(expected_goals) AS xG, AVG(expected_assists) AS expected_assists FROM merged_gw WHERE team LIKE ? AND position LIKE ? GROUP BY name ORDER BY (AVG(total_points)) DESC",team, position)
             playerlist = []
             finallist = {}
             rows2 = db.execute("SELECT name1 AS 'Team Name', CASE WHEN (fix.team_a = teams.id1) THEN (fix.team_a_difficulty) WHEN (fix.team_h = teams.id1) THEN (fix.team_h_difficulty) END AS 'Fixture Difficulty', event FROM teams, fix WHERE (teams.id1 = fix.team_a  OR teams.id1 = fix.team_h) AND (fix.event LIKE ?) GROUP BY name1", 16)
@@ -185,7 +184,7 @@ def results():
 def playerstats():
     if request.method == "GET":
         playernames = []
-        stat = db.execute("SELECT name FROM fpl GROUP BY name")
+        stat = db.execute("SELECT name FROM merged_gw GROUP BY name")
         for line in stat:
             playernames.append(line["name"])
         playerstats = render_template("playerstats.html")
@@ -196,10 +195,10 @@ def playerstats():
         maxgoalsgw = []
         maxpointtotal = []
         maxpointtotalgw = []
-        stat = db.execute("SELECT name, minutes, goals_scored, assists, yellow_cards, red_cards, influence, total_points, GW, value, name1 FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? AND GW < ? ORDER BY GW", nameweb, 16)
-        hipointstotals = db.execute("SELECT MAX(total_points) AS 'total_points', goals_scored, assists, GW, name1 AS 'opposition' FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY total_points ",nameweb)
-        higoalscoredtotal = db.execute("SELECT MAX(goals_scored) AS 'goals_scored', assists, total_points, GW, name1 AS 'opposition' FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY goals_scored", nameweb)
-        pointspermili = db.execute("SELECT name, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili' FROM fpl WHERE name LIKE ? GROUP BY name", nameweb)
+        stat = db.execute("SELECT name, minutes, goals_scored, assists, yellow_cards, red_cards, influence, total_points, GW, value, name1 FROM merged_gw, teams WHERE id1 = opponent_team AND name LIKE ? AND GW < ? ORDER BY GW", nameweb, GW[0] + 1)
+        hipointstotals = db.execute("SELECT MAX(total_points) AS 'total_points', goals_scored, assists, GW, name1 AS 'opposition' FROM merged_gw, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY total_points ",nameweb)
+        higoalscoredtotal = db.execute("SELECT MAX(goals_scored) AS 'goals_scored', assists, total_points, GW, name1 AS 'opposition' FROM merged_gw, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY goals_scored", nameweb)
+        pointspermili = db.execute("SELECT name, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili' FROM merged_gw WHERE name LIKE ? GROUP BY name", nameweb)
         price = []
         for line in stat:
             name = line["name"]
@@ -224,7 +223,7 @@ def playerstats():
 def compareplayer():
     if request.method == "GET":
         playernames = []
-        stat = db.execute("SELECT name FROM fpl GROUP BY name")
+        stat = db.execute("SELECT name FROM merged_gw GROUP BY name")
         for line in stat:
             playernames.append(line["name"])
         compareplayer = render_template("compareplayers.html")
@@ -232,8 +231,8 @@ def compareplayer():
     else:
         name1 = request.form.get("nameweb1")
         name2 = request.form.get("nameweb2")
-        statp1 = db.execute("SELECT name, minutes, goals_scored, assists, yellow_cards, red_cards, influence, total_points, GW, value, name1 FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? AND GW < ? ORDER BY GW", name1, 16)
-        statp2 = db.execute("SELECT name, minutes, goals_scored, assists, yellow_cards, red_cards, influence, total_points, GW, value, name1 FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? AND GW < ? ORDER BY GW", name2, 16)
+        statp1 = db.execute("SELECT name, SUM(minutes) AS 'minutes', SUM(goals_scored) AS 'goals_scored', SUM(assists) AS 'assists', SUM(yellow_cards) AS 'yellow_cards', SUM(red_cards) AS 'red_cards', ROUND(AVG(influence), 2) AS 'average_influence', SUM(total_points) AS 'total_points', value FROM merged_gw WHERE name LIKE ? AND GW < ? GROUP BY name", name1, GW[0] + 1)
+        statp2 = db.execute("SELECT name, SUM(minutes) AS minutes, SUM(goals_scored) AS goals_scored, SUM(assists) AS assists, SUM(yellow_cards) AS yellow_cards, SUM(red_cards) AS red_cards, ROUND(AVG(influence), 2) average_influence, SUM(total_points) AS total_points, value FROM merged_gw WHERE name LIKE ? AND GW < ? GROUP BY name", name2, GW[0] + 1)
         #player 1 points and goals
         pricep1 = []
         for line in statp1:
@@ -243,14 +242,14 @@ def compareplayer():
         pricep1 = set(pricep1)
         for line in pricep1:
             pricep1 = float(line)
-        hipointstotal1 = db.execute("SELECT MAX(total_points) AS 'total_points', goals_scored, assists, GW, name1 AS 'opposition' FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY total_points ",name1)
-        higoalscoredtotal1 = db.execute("SELECT MAX(goals_scored) AS 'goals_scored', assists, total_points, GW, name1 AS 'opposition' FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY goals_scored", name1)
-        pointspermili1 = db.execute("SELECT name, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili' FROM fpl WHERE name LIKE ? GROUP BY name", name1)
+        hipointstotal1 = db.execute("SELECT MAX(total_points) AS 'total_points', goals_scored, assists, GW, name1 AS 'opposition' FROM merged_gw, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY total_points ",name1)
+        higoalscoredtotal1 = db.execute("SELECT MAX(goals_scored) AS 'goals_scored', assists, total_points, GW, name1 AS 'opposition' FROM merged_gw, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY goals_scored", name1)
+        pointspermili1 = db.execute("SELECT name, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili' FROM merged_gw WHERE name LIKE ? GROUP BY name", name1)
         #player 2 points and goals
         pricep2 = []
-        hipointstotal2 = db.execute("SELECT MAX(total_points) AS 'total_points', goals_scored, assists, GW, name1 AS 'opposition' FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY total_points ",name2)
-        higoalscoredtotal2 = db.execute("SELECT MAX(goals_scored) AS 'goals_scored', assists, total_points, GW, name1 AS 'opposition' FROM fpl, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY goals_scored", name2)
-        pointspermili2 = db.execute("SELECT name, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili' FROM fpl WHERE name LIKE ? GROUP BY name", name2)
+        hipointstotal2 = db.execute("SELECT MAX(total_points) AS 'total_points', goals_scored, assists, GW, name1 AS 'opposition' FROM merged_gw, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY total_points ",name2)
+        higoalscoredtotal2 = db.execute("SELECT MAX(goals_scored) AS 'goals_scored', assists, total_points, GW, name1 AS 'opposition' FROM merged_gw, teams WHERE id1 = opponent_team AND name LIKE ? GROUP BY goals_scored", name2)
+        pointspermili2 = db.execute("SELECT name, ROUND(AVG(total_points)/CAST(value AS float), 2) AS 'pointspermili' FROM merged_gw WHERE name LIKE ? GROUP BY name", name2)
         pricep2 = []
         for line in statp2:
             name2 = line["name"]
