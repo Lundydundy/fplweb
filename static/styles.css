@@ -1,3 +1,5 @@
+
+
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;
@@ -199,7 +201,7 @@
     display: grid;
     justify-content: center;
 
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.51fr 1.51fr 1fr;
     grid-template-rows: repeat(1, 1fr);
 
     gap: 5px;
