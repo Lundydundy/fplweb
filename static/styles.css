@@ -179,7 +179,7 @@
     align-items: center;
     justify-content: center;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(1, 1fr);
 
     gap: 5px;
@@ -268,11 +268,13 @@
   }
 
   .table{
-      width: 80%;
+      width: 90%;
+      min-width: 0;
       border-collapse: collapse;
       overflow: hidden;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      margin: auto;  
+      margin: auto;
+      font-size: 1.1vw;
   }
 
 th,

@@ -7,13 +7,13 @@
 {% block main %}
 
 
-<a class="btn btn-primary center" style="display: block; margin: auto; width: 150px;" href="/compareplayers" role="button">Search Again</a>
+<a class="btn btn-primary center" style="display: block; margin: auto; width: 20%; font-size: 1vw;" href="/compareplayers" role="button">Search Again</a>
 </div>
 <div class="containercompareresults">
     <div></div>
     <div style="height: 60%; background: linear-gradient(45deg, #49a09d, #5f2c82); color: black">
         <div style="margin-top: 10px;">
-        <h1 class="center kanit fadein2" id="h1" style="width: 70%; margin: auto; color: white; background-color: #464f76;">{{ name1 }} - £{{pricep1}}</h1>
+        <h1 class="center kanit fadein2" id="h1" style="font-size: 2.3vw; width: 70%; margin: auto; color: white; background-color: #464f76;">{{ name1 }} - £{{pricep1}}</h1>
         <table class="table fadein3" style="margin: auto; height: 100px; width: 75%; margin-top: 10px;">
             <thead class="kanit" style="color: black">
                 <tr>
@@ -66,7 +66,7 @@
 
     <div style="height: 60%; background: linear-gradient(45deg, #49a09d, #5f2c82); color: black">
         <div style="margin-top: 10px">
-        <h1 class="center kanit fadein2" id="h2" style="width: 70%; margin: auto; color: white; background-color: #464f76;">{{ name2 }} - £{{pricep2}}</h1>
+        <h1 class="center kanit fadein2" id="h2" style="font-size: 2.3vw; width: 70%; margin: auto; color: white; background-color: #464f76;">{{ name2 }} - £{{pricep2}}</h1>
         <table class="table fadein3" style="margin: auto; height: auto; width: 75%; margin-top: 10px;">
             <thead class="kanit" style="color: black">
                 <tr>
@@ -130,7 +130,6 @@
     if (document.getElementById("h2").innerText.includes('Bruno Borges Fernandes')){
         document.getElementById("h2").innerText = "Bruno Fernandes - £{{pricep2}}";
     }
-
     if (document.getElementById("h1").innerText.includes('Gabriel Fernando de Jesus')){
         document.getElementById("h1").innerText = "Gabriel Jesus - £{{pricep1}}";
     }
@@ -161,7 +160,13 @@
     if (document.getElementById("h2").innerText.includes('Bruno Borges Fernandes')){
         document.getElementById("h2").innerText = "Bruno Fernandes - £{{pricep2}}";
     }
-    
+    if (document.getElementById("h1").innerText.includes('Bruno Guimarães Rodriguez Moura')){
+        document.getElementById("h1").innerText = "Bruno Guimarães - £{{pricep1}}";
+    }
+    if (document.getElementById("h2").innerText.includes('Bruno Guimarães Rodriguez Moura')){
+        document.getElementById("h2").innerText = "Bruno Guimarães - £{{pricep2}}";
+    }
+
 </script>
 
 <script>
@@ -179,8 +184,8 @@
 
     }
     else if (player1[i] == player2[i]){
-        player1e[i].style.color = 'black';
-        player2e[i].style.color = 'black';
+        player1e[i].style.color = 'white';
+        player2e[i].style.color = 'white';
         player1e[i].style.backgroundColor = 'orange';
         player2e[i].style.backgroundColor = 'orange';
 

@@ -8,11 +8,12 @@
 
 <script>
     function sortTableN0(n) {
-      var table, rows, switching, i, x, y, shouldSwitch;
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
       table = document.getElementById("statstable");
       switching = true;
       /*Make a loop that will continue until
       no switching has been done:*/
+      dir = "asc";
       while (switching) {
         //start by saying: no switching is done:
         switching = false;
@@ -27,20 +28,36 @@
           x = rows[i].getElementsByTagName("TD")[n];
           y = rows[i + 1].getElementsByTagName("TD")[n];
           //check if the two rows should switch place:
+        if (dir == "asc") {
           if (Number(x.innerHTML) < Number(y.innerHTML)) {
             //if so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
           }
+        } else if (dir == "desc") {
+          if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
         }
+      }  
         if (shouldSwitch) {
           /*If a switch has been marked, make the switch
           and mark that a switch has been done:*/
           rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
           switching = true;
+          switchcount ++;
+        }else {
+          /* If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
         }
       }
-    }
+    }  
     </script>
 <script>
 
@@ -100,52 +117,48 @@
     }
     </script>
 
-    <a class="btn btn-primary center" style="display: block; margin: auto; width: 150px;" href="/playerstats" role="button">Search Again</a>
+    <a class="btn btn-primary center" style="display: block; margin: auto; width: 20%; font-size: 1vw;" href="/playerstats" role="button">Search Again</a>
     </div>
     <div style="background: linear-gradient(45deg, #49a09d, #5f2c82);">
-        <h1 class="center kanit fadein2" style="width: 40%; margin-left: 75px; color: white; background: #464f76; border: solid black">{{ namesql }} - £{{price}}</h1>
-        <div class ="container3">
-        <table class="table fadein3" id="statstable" style="width: 90%; margin: auto;">
+      <h1 class="center kanit fadein2" style="font-size: 2.3vw; width: 40%; margin-left: 75px; color: white; background: #464f76; border: solid black">{{ namesql }} - £{{price}}</h1>
+        <div class ="container3" style="margin: auto; justify-content: center;">
+          <table class="table fadein3" id="statstable" style="margin: auto;">
             <thead class="kanit">
-                <tr style="color: black">
-                    <th scope="col" onclick="sortTableN0(0)">Gameweek</th>
-                    <th scope="col" onclick="sortTableN0(1)">Minutes Played</th>
-                    <th scope="col" onclick="sortTableN0(2)">Goals Scored</th>
-                    <th scope="col" onclick="sortTableN0(3)">Assists</th>
-                    <th scope="col" onclick="sortTableN0(4)">Yellow Cards</th>
-                    <th scope="col" onclick="sortTableN0(5)">Red Cards</th>
-                    <th scope="col" onclick="sortTableN0(6)">Influence</th>
-                    <th scope="col" onclick="sortTableN0(7)">Points</th>
-                    <th scope="col" onclick="sortTableL0(8)">Opposition</th>
-                </tr>
+              <tr style="color: black">
+                <th scope="col" onclick="sortTableN0(0)">Gameweek</th>
+                <th scope="col" onclick="sortTableN0(1)">Minutes Played</th>
+                <th scope="col" onclick="sortTableN0(2)">Goals Scored</th>
+                <th scope="col" onclick="sortTableN0(3)">Assists</th>
+                <th scope="col" onclick="sortTableN0(4)">Yellow Cards</th>
+                <th scope="col" onclick="sortTableN0(5)">Red Cards</th>
+                <th scope="col" onclick="sortTableN0(6)">Influence</th>
+                <th scope="col" onclick="sortTableN0(7)">Points</th>
+                <th scope="col" onclick="sortTableL0(8)">Opposition</th>
+              </tr>
             </thead>
             <tbody class="kanit" style="color: black">
-                {% for player in stat %}
-                    <tr>
-                        <td>{{ player.GW }}</td>
-                        <td>{{ player.minutes }}</td>
-                        <td>{{ player.goals_scored }}</td>
-                        <td>{{ player.assists }}</td>
-                        <td>{{ player.yellow_cards }}</td>
-                        <td>{{ player.red_cards }}</td>
-                        <td>{{ player.influence }}</td>
-                        <td>{{ player.total_points }}</td>
-                        <td>{{ player.name1 }}</td>
-
-                      
-                {% endfor %}
-</td>
-</tr>
-</tbody>
-</table>
-<div class="fadein3" style= "color: white; margin-right: 20px;">
-    <p style="background: #464f76; border: solid black;">{{namesql}}'s best points total was in Gameweek {{ maxpointtotalgw }} accumalating {{ maxpointtotal }} against {{ maxpointtotalopp }}.</p>
-    <p style="background: #464f76; border: solid black;">{{namesql}}'s best total goals in a game was Gameweek {{ maxgoalsgw }} scoring {{ maxgoals }} against {{ maxgoalopp }}.</p>
-    <p style="background: #464f76; border: solid black;">{{namesql}}'s current price is £{{ price }}.</p>
-    <p style="background: #464f76; border: solid black;">{{namesql}}'s current points per million for the season is {% for line in pointspermili %} {{ line.pointspermili }} {% endfor %} PPM.</p>
-
-
-</div>
-</div>
-</div>
+              {% for player in stat %}
+              <tr>
+                <td>{{ player.GW }}</td>
+                <td>{{ player.minutes }}</td>
+                <td>{{ player.goals_scored }}</td>
+                <td>{{ player.assists }}</td>
+                <td>{{ player.yellow_cards }}</td>
+                <td>{{ player.red_cards }}</td>
+                <td>{{ player.influence }}</td>
+                <td>{{ player.total_points }}</td>
+                <td>{{ player.name1 }}</td>                      
+              {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        
+        <div class="fadein3" style= "color: white; margin: auto; font-size: 1.2vw; width: 50%; margin-top: 20px;">
+          <p style="background: #464f76; border: solid black;">{{namesql}}'s best points total was in Gameweek {{ maxpointtotalgw }} accumalating {{ maxpointtotal }} against {{ maxpointtotalopp }}.</p>
+          <p style="background: #464f76; border: solid black;">{{namesql}}'s best total goals in a game was Gameweek {{ maxgoalsgw }} scoring {{ maxgoals }} against {{ maxgoalopp }}.</p>
+          <p style="background: #464f76; border: solid black;">{{namesql}}'s current price is £{{ price }}.</p>
+          <p style="background: #464f76; border: solid black;">{{namesql}}'s current points per million for the season is {% for line in pointspermili %} {{ line.pointspermili }} {% endfor %} PPM.</p>
+        </div>
+      </div>
+    </div>
     {% endblock %}
